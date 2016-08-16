@@ -64,5 +64,76 @@ object FirstTen {
    *   scala> reverse(List(1, 1, 2, 3, 5, 8))
    *   res0: List[Int] = List(8, 5, 3, 2, 1, 1)
    **/
+  def reverse[A](list: List[A]):List[A] = list match {
+    case Nil => Nil
+    case x::Nil => list
+    case h::t => reverse(t):+h
+  }
+  
+  /**
+   * P06 (*) Find out whether a list is a palindrome.
+      Example:
+      scala> isPalindrome(List(1, 2, 3, 2, 1))
+      res0: Boolean = true
+   **/
+  def isPalindrome[A](list: List[A]) = list == reverse(list)
+  
+  /**
+   * P07 (**) Flatten a nested list structure.
+      Example:
+      scala> flatten(List(List(1, 1), 2, List(3, List(5, 8))))
+      res0: List[Any] = List(1, 1, 2, 3, 5, 8)
+   **/
+  def flatten(list: List[Any]) : List[Any] = list match {
+    case Nil => Nil
+    case h::t => 
+      if (h.isInstanceOf[List[Any]]) 
+        flatten(h.asInstanceOf[List[Any]])++(flatten(t))
+      else 
+        h::flatten(t)
+  }
+  
+  
+  /**
+	 * P08 (**) Eliminate consecutive duplicates of list elements.
+      If a list contains repeated elements they should be replaced with a single copy of the element. The order of the elements should not be changed.
+      Example:
+      scala> compress(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))
+      res0: List[Symbol] = List('a, 'b, 'c, 'a, 'd, 'e)
+   **/
+  def compress[A](list: List[A]): List[A] = {
+    def compressAux(list: List[A], a: Option[A]): List[A] = list match {
+      case Nil=> Nil
+      case h::t=>
+        if (a == None
+            || h != a.get)
+          h :: compressAux(t, Some(h))
+        else  
+          compressAux(t, a) 
+        
+    }
+    compressAux(list, None)
+  }
+  
+  
+  /**
+	 * P09 (**) Pack consecutive duplicates of list elements into sublists.
+      If a list contains repeated elements they should be placed in separate sublists.
+      Example:
+      scala> pack(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))
+      res0: List[List[Symbol]] = List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e))
+	 **/
+  
+  
+  
+  /**
+	 * P10 (*) Run-length encoding of a list.
+      Use the result of problem P09 to implement the so-called run-length encoding data compression method. Consecutive duplicates of elements are encoded as tuples (N, E) where N is the number of duplicates of the element E.
+      Example:
+      scala> encode(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))
+      res0: List[(Int, Symbol)] = List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e))
+   */
+  
+  
   
 }
