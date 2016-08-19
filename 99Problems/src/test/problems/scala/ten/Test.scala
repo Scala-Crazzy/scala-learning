@@ -14,8 +14,12 @@ object Test {
     println("Problem 06: Is the list palindrome: %s".format(FirstTen.isPalindrome(List(1,2,3,2,1))))
     println("Problem 07: Flatten list: %s".format(FirstTen.
         flatten(List(1, 2, List(3, List(10, 11, 12)), 5, List(), List(6, 7, 8), List(9)))))
-    println("Problem 08: Is the list palindrome: %s".format(FirstTen.
+    println("Problem 08: Compressed List: %s".format(FirstTen.
         compress(List(1, 1, 2, 3, 3, 3, 4, 4, 5, 5, 6, 6, 6, 6, 7))))
+    println("Problem 09: Packed List: %s".format(FirstTen.
+        pack(List(1, 1, 2, 3, 3, 3, 4, 4, 5, 5, 6, 6, 6, 6, 7))))
+    println("Problem 10: Encoded List: %s".format(FirstTen.
+        encode(List(1, 1, 2, 3, 3, 3, 4, 4, 5, 5, 6, 6, 6, 6, 7))))    
   }
   
   
