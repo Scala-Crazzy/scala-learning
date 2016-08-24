@@ -26,4 +26,27 @@ object CommonUtil {
       
     spanAux(list, Nil)
   }
+  
+  /**
+   * Determines the length of a list
+   */
+  def length[A](list: List[A]): Int = {
+    def lengthAux(list : List[A], count : Int) : Int = list match {
+      case Nil => count
+      case _:: t => lengthAux(t, count + 1)
+    }
+    
+    lengthAux(list, 0)
+  }
+  
+  /**
+   * Repeats an element count number of times
+   */
+  def repeat[A](element:A, count:Int):List[A] = {
+    @tailrec
+    def repeatAux(eleList:List[A], cnt: Int): List[A] =
+      if (cnt <= 0) eleList else repeatAux(element::eleList, cnt - 1);
+    
+    repeatAux(Nil, count)
+  }
 }

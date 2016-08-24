@@ -53,12 +53,7 @@ object FirstTen {
    *   res0: Int = 6
    **/
   def length[A](list: List[A]): Int = {
-    def lengthAux(list : List[A], count : Int) : Int = list match {
-      case Nil => count
-      case _:: t => lengthAux(t, count + 1)
-    }
-    
-    lengthAux(list, 0)
+    test.problems.scala.common.CommonUtil.length(list)
   }
   
   /**
@@ -117,7 +112,6 @@ object FirstTen {
 	 **/
   def pack[A](list: List[A]):List[List[A]] = list match {
     case Nil => Nil
-    //case h::t => (h::takeWhile(t, (p:A) => h == p))::pack(dropWhile(t, (p:A) => h == p))  
     case h::t => 
       {
         val lists = span(t, (p:A) => h == p)
