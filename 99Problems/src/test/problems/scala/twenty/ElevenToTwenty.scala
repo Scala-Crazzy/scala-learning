@@ -2,6 +2,8 @@ package test.problems.scala.twenty
 
 import test.problems.scala.common.CommonUtil._
 import test.problems.scala.ten.FirstTen.encode
+import scala.annotation.tailrec
+import test.problems.scala.ten.FirstTen
 
 object ElevenToTwenty {
   
@@ -68,7 +70,8 @@ object ElevenToTwenty {
     if (list == Nil)
       Nil
       
-    encodeDirectAux(list, list.head, 0)
+    //encodeDirectAux(list, list.head, 0) // Avoided one iteration - matching head with the head himself for first time
+    encodeDirectAux(list.tail, list.head, 1)
   }
 
   /**
@@ -99,6 +102,15 @@ object ElevenToTwenty {
    *   scala> drop(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
    *   res0: List[Symbol] = List('a, 'b, 'd, 'e, 'g, 'h, 'j, 'k)
    **/
+  def drop[A](c: Int, list: List[A]): List[A] = {
+    @tailrec
+    def aux(list: List[A], res: List[A], acc: Int): List[A] = list match {
+      case Nil => res
+      case x :: xs => if (acc % c == 0) aux(xs, res, acc + 1) else aux(xs, x :: res, acc + 1)
+    }
+    
+    FirstTen.reverse(aux(list, Nil, 1))
+  }
 
   /**
    * P17 (*) Split a list into two parts.
