@@ -20,6 +20,11 @@ object Test {
     println("Problem 15: List duplicated %d times: %s".format(4, ElevenToTwenty
         .duplicateN(4, List(1, 2, 3, 4))))
     println("Problem 16: List with skipped kth(%d) Value: %s".format(3, ElevenToTwenty.drop(3, list)))
+    
+    println("Problem 18: Slice of list: %s".format(ElevenToTwenty.slice(3, 7, list)))
+    println("Problem 19: Rotation of List for %d: %s".format(3, ElevenToTwenty.rotate(3, list)))
+    println("Problem 19: Rotation of List for %d: %s".format(-3, ElevenToTwenty.rotate(-3, list)))
+    println("Problem 20: Removed kth(%d) element from list: %s".format(3, ElevenToTwenty.removeAt(3, list)))
   }
 
 }

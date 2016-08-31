@@ -129,6 +129,15 @@ object ElevenToTwenty {
    *   scala> slice(3, 7, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
    *   res0: List[Symbol] = List('d, 'e, 'f, 'g)
    */
+  def slice[A](s: Int, e: Int, list: List[A]): List[A] = {
+    @tailrec
+    def aux(c: Int, list: List[A], res: List[A]): List[A] = list match {
+      case Nil => res
+      case x :: xs => if (c == e) res else if (c >= s) aux(c + 1, xs, x :: res) else aux(c + 1, xs, res)
+    }
+    
+    FirstTen.reverse(aux(0, list, Nil))
+  }
 
   /**
    * P19 (**) Rotate a list N places to the left.
@@ -140,6 +149,17 @@ object ElevenToTwenty {
    *   res1: List[Symbol] = List('j, 'k, 'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i)
    * 
    */
+  def rotate[A](r: Int, list: List[A]): List[A] = {
+    val n = if (r < 0) r + list.length else r
+    
+    @tailrec
+    def aux(c: Int, list: List[A], rot: List[A]): List[A] = list match {
+      case Nil => FirstTen.reverse(rot)
+      case x :: xs => if (c == n) (xs foldRight FirstTen.reverse(x :: rot))(_ :: _) else aux(c + 1, xs, x :: rot)
+    }
+    
+    aux(1, list, Nil)
+  }
   
   /**
    * P20 (*) Remove the Kth element from a list.
@@ -149,6 +169,15 @@ object ElevenToTwenty {
    *   scala> removeAt(1, List('a, 'b, 'c, 'd))
    *   res0: (List[Symbol], Symbol) = (List('a, 'c, 'd),'b)
    */
+  def removeAt[A](i: Int, list: List[A]): (List[A], Option[A]) = {
+    @tailrec
+    def aux(c: Int, list: List[A], left: List[A]): (List[A], Option[A]) = list match {
+      case Nil => (FirstTen.reverse(left), None)
+      case x :: xs => if (c == i) ((FirstTen.reverse(left) foldRight xs)(_ :: _), Some(x)) else aux(c + 1, xs, x :: left)
+    }
+    
+    aux(0, list, Nil)
+  }
 
 
 }  
